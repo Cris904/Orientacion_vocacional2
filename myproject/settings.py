@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import pymysql
 from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
+from django.core.management.utils import get_random_secret_key
 
 # Loading ENV
 env_path = Path('.') / '.env'
@@ -22,12 +24,13 @@ load_dotenv(dotenv_path=env_path)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+pymysql.install_as_MySQLdb()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY',get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
@@ -39,6 +42,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_cleanup',
 
     'django.contrib.admin',
@@ -63,6 +67,7 @@ INSTALLED_APPS = [
     'channels',
     'friend',
     'videocall',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -104,25 +110,19 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'social_media',
+        'USER': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        }
+
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'socialNet',
-#         'USER': 'postgres',
-#         'PASSWORD': os.getenv("PGDB_PWD"),
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
