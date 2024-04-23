@@ -20,7 +20,7 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
           <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
-
+          <a class="nav-item nav-link" href="{% url 'blog-maps' %}">maps</a>
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="{% url 'show-notifications' %}">Notifications</a>
           <a class="nav-item nav-link" href="{% url 'room-enroll' %}">Chats</a>

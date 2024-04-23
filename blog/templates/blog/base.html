@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.css" integrity="sha512-iAcZ4OrGhQ7KDqtM+LMc+iuv63aJ9O7hPyWBzCXsrZYuhJ6jhdeh40+hf9o4QmZVu8QrH/cWy/JTmoKNOL4Urw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="{% static 'blog/main.css' %}">
-    <title>Word-Bucket | {% block title %}{% endblock %}</title>
-</head>
-<body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script> 
+    <body>
     <header class="site-header">
 
         <!-- NAVBAR -->
@@ -46,7 +46,104 @@
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.js" integrity="sha512-E+gDQcIvNXE60SjCS38ysf1mGh4ObBpKcUOp0oEaHQHQAdaN2p7GelOpgEdpTuCLoIJyLkNXiqFZbyD9Ak/Ygw==" crossorigin="anonymous"></script>
+
+      {% block leaflet_script %}
+      <!-- Leaflet Map Scripts -->
+      <script>
+          $(document).ready(function(event){
+              /* Your Leaflet Map Initialization and Handling Scripts Here */
+              // Inicializar el mapa en el contenedor con el ID 'mapid'
+              var mymap = L.map('mapid'); 
       
+              // Utilizar la API de geolocalización del navegador para obtener la ubicación del usuario
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                      var userLat = position.coords.latitude;
+                      var userLon = position.coords.longitude;
+      
+                      // Configurar el mapa para centrarse en la ubicación del usuario
+                      mymap.setView([userLat, userLon], 13);
+      
+                      // Agregar una capa de mapa base
+                      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      }).addTo(mymap);
+      
+                      // Coordenadas de lugares de interés en Bogotá
+                      var places = [
+    { name: 'SENA Centro de Formación en Actividad Física y Cultura (Sede Onassis)', lat: 4.617231137319650, lon: -74.16562187028160 },
+    { name: 'SENA Kennedy Centro de Formación en Actividad Física y Cultura', lat: 4.618566565573170, lon: -74.15906610821310 },
+    { name: 'SENA Centro de Gestión Administrativa', lat: 4.6040844313229900, lon: -74.07920788562770 },
+    { name: 'SENA - Centro De Servicios Financieros', lat: 4.651865229278840, lon: -74.0629746422028 },
+    { name: 'SENA Centro de Gestión Industrial', lat: 4.616393660641980, lon: -74.09196183084280 },
+    { name: 'SENA Centro de Gestión de Mercados, Logística y Tecnologías de la Información - Fontibón', lat: 4.670532316554580, lon: -74.13973780812840 },
+    { name: 'Sena Centro Metalmecánico', lat: 4.596085834279890, lon: -74.1109095834738 },
+    { name: 'UNIVERSIDAD COOPERATIVA DE COLOMBIA', lat: 4.626151039222560, lon: -74.06925230385558 },
+    { name: 'UNIVERSIDAD ANTONIO NARIÑO', lat: 4.649990399557280, lon: -74.08423500586918 },
+    { name: 'CORPORACION UNIFICADA NACIONAL DE EDUCACION SUPERIOR-CUN-', lat: 4.598650894586260, lon: -74.07242496989590 },
+    { name: 'CORPORACION UNIVERSITARIA MINUTO DE DIOS -UNIMINUTO-', lat: 4.69831967452193, lon: -74.08918001560020 },
+    { name: 'FUNDACIÓN UNIVERSITARIA COMPENSAR', lat: 4.6210787214827600, lon: -74.07302772647190 },
+    { name: 'UNIVERSIDAD DE SAN BUENAVENTURA', lat: 4.751365246355790, lon: -74.0299222664681 },
+    { name: 'FUNDACION UNIVERSITARIA DEL AREA ANDINA', lat: 4.657752402556230, lon: -74.06256464740730 },
+    { name: 'UNIVERSIDAD SANTO TOMAS', lat: 4.638260664159920, lon: -74.06522274612820 },
+    { name: 'UNIVERSIDAD LIBRE', lat: 4.59480523956827, lon: -74.07554846293230 },
+    { name: 'UNIVERSIDAD NACIONAL DE COLOMBIA', lat: 4.636362003585070, lon: -74.08330615967970 },
+    { name: 'POLITECNICO GRANCOLOMBIANO', lat: 4.63744884921057, lon: -74.05494993530560 },
+    { name: 'PONTIFICIA UNIVERSIDAD JAVERIANA', lat: 4.628490350938050, lon: -74.0647110020479 },
+    { name: 'FUNDACION UNIVERSITARIA LOS LIBERTADORES', lat: 4.651578916631680, lon: -74.06632065540100 },
+    { name: 'UNIVERSIDAD MANUELA BELTRAN-UMB-', lat: 4.642537252779470, lon: -74.05432551828240 },
+    { name: 'UNIVERSIDAD INCCA DE COLOMBIA', lat: 4.611524129832010, lon: -74.07259630617180 },
+    { name: 'FUNDACION UNIVERSIDAD DE BOGOTA - JORGE TADEO LOZANO', lat: 4.606564132559490, lon: -74.06780117716610 },
+    { name: 'CORPORACION TECNOLOGICA INDUSTRIAL COLOMBIANA - TEINCO', lat: 4.65101089391174, lon: -74.06417403986310 },
+    { name: 'FUNDACION UNIVERSITARIA HORIZONTE', lat: 4.656153855616600, lon: -74.06316912474750 },
+    { name: 'CORPORACION UNIVERSIDAD PILOTO DE COLOMBIA', lat: 4.63266962810502, lon: -74.06555014635120 },
+    { name: 'CORPORACION UNIVERSITARIA IBEROAMERICANA', lat: 4.6495747341727600, lon: -74.05702225889360 },
+    { name: 'UNIVERSIDAD PEDAGOGICA NACIONAL', lat: 4.65836539045857, lon: -74.05918029265690 },
+    { name: 'CORPORACIÓN JOHN F. KENNEDY', lat: 4.64069180601940, lon: -74.07325008012200 },
+    { name: 'POLITECNICO INTERNACIONAL INSTITUCION DE EDUCACION SUPERIOR', lat: 4.73065504682936, lon: -74.06785844647020 },
+    { name: 'UNIVERSIDAD DE LA SABANA', lat: 4.861580920105410, lon: -74.03253727093460 },
+    { name: 'FUNDACION TECNOLOGICA AUTONOMA DE BOGOTA-FABA-', lat: 4.666462032886010, lon: -74.0562488811049 },
+    { name: 'UNIVERSIDAD CENTRAL', lat: 4.605953661745890, lon: -74.06869550487250 },
+    { name: 'FUNDACION UNIVERSITARIA COLOMBO GERMANA', lat: 4.605434976999000, lon: -74.06976603815330 },
+    { name: 'CORPORACION TECNOLOGICA DE BOGOTA - CTB', lat: 4.643407178339830, lon: -74.07179603867570 },
+    { name: 'UNIVERSIDAD EXTERNADO DE COLOMBIA', lat: 4.595574171543900, lon: -74.06889295887690 },
+    { name: 'INSTITUCION UNIVERSITARIA COLEGIOS DE COLOMBIA - UNICOC', lat: 4.847052633342080, lon: -74.02930200465840 },
+    { name: 'FUNDACION UNIVERSITARIA MONSERRATE -UNIMONSERRATE', lat: 4.672592841366660, lon: -74.08285564072460 },
+    { name: 'CORPORACION UNIVERSITARIA REFORMADA - CUR -', lat: 4.63153306676956, lon: -74.08453985650730 },
+    { name: 'FUNDACION UNIVERSITARIA EMPRESARIAL DE LA CAMARA DE COMERCIO DE BOGOTA- UNIEMPRESARIAL', lat: 4.631739047695400, lon: -74.08057890820950 },
+    { name: 'FUNDACIÓN POLITÉCNICO MINUTO DE DIOS - TEC MD', lat: 4.701200161955150, lon: -74.0899436741777 },
+    { name: 'UNIVERSIDAD CATOLICA DE COLOMBIA', lat: 4.633997176091670, lon: -74.06663749268420 },
+    { name: 'FUNDACION UNIVERSITARIA CAFAM -UNICAFAM', lat: 4.685829578405960, lon: -74.07297795528240 },
+    { name: 'ESEIT - ESCUELA SUPERIOR DE EMPRESA, INGENIERÍA Y TECNOLOGÍA', lat: 4.664834387242600, lon: -74.05437641189860 },
+    { name: 'FUNDACION DE EDUCACION SUPERIOR ALBERTO MERANI', lat: 4.6619177004173100, lon: -74.06356322137970 },
+    { name: 'FUNDACION DE EDUCACION SUPERIOR ESATEC', lat: 4.65453556611541, lon: -74.06434345990100 },
+    { name: 'UNIVERSIDAD-COLEGIO MAYOR DE CUNDINAMARCA', lat: 4.615062623254540, lon: -74.06712024794560 },
+    { name: 'CORPORACION CENTRO DE ESTUDIOS ARTISTICOS Y TECNICOS-CEART-', lat: 4.629967035810420, lon: -74.06710171027560 },
+    { name: 'ESCUELA SUPERIOR DE ADMINISTRACION PUBLICA-ESAP-', lat: 4.644526679427850, lon: -74.0930634670455 },
+    { name: 'CORPORACIÓN COLSUBSIDIO EDUCACIÓN TECNOLÓGICA - CET', lat: 4.651476585012190, lon: -74.06183933508730 },
+    { name: 'FUNDACION UNIVERSITARIA KONRAD LORENZ', lat: 4.650537424097700, lon: -74.06154574416360 },
+    { name: 'INSTITUCION DE EDUCACION TECNOLOGICA INTERNACIONAL - UNIVERSAE', lat: 4.666658677561670, lon: -74.0578686957529 },
+    { name: 'FUNDACION UNIVERSITARIA INTERNACIONAL DE LA RIOJA - UNIR', lat: 4.685671611884730, lon: -74.05281207669170 },
+    { name: 'POLITECNICO ICAFT', lat: 4.641064876712650, lon: -74.124263072201250 },
+    { name: 'FUNDACIÓN UNIVERSITARIA SALESIANA', lat: 4.6619385870708600, lon: -74.10783389716040 },
+    { name: 'ESCUELA DE INGENIEROS MILITARES', lat: 4.629758941593020, lon: -74.107238114795140 },
+    { name: 'FUNDACION DE EDUCACION SUPERIOR SIKUANI - FESI', lat: 4.720145750777590, lon: -74.05547917620830 }
+];
+                      // Agregar marcadores para cada lugar de interés
+                      places.forEach(function(place) {
+                          L.marker([place.lat, place.lon])
+                              .addTo(mymap)
+                              .bindPopup(place.name);
+                      });
+                  });
+              } else {
+                  // Si el navegador no soporta geolocalización, mostrar un mensaje de error
+                  alert("Geolocalización no es soportada por este navegador.");
+              }
+          });
+      </script>
+      {% endblock %}
+      <!-- End Leaflet Map Scripts -->
       <script>
         $(function () {
     
