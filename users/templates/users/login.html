@@ -34,7 +34,7 @@
 
 <div class="m-auto col-md-8">
 <div class="content-section">
-    <h3 class="border-bottom pb-3 mb-4">Login</h3>
+    <h3 class="border-bottom pb-3 mb-4">Inicio de sesión</h3>
 
     <form method="post">
         {% csrf_token %}
@@ -42,12 +42,12 @@
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign In</button>
+            <button class="btn btn-outline-info" type="submit">Iniciar sesión</button>
         </div>
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Don't have an account? <a class="ml-2" href="{% url 'account_signup' %}">Sign Up</a>
+            ¿No tiene cuenta? <a class="ml-2" href="{% url 'account_signup' %}">Resgistrate</a>
         </small>
     </div>
 </div>

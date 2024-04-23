@@ -20,20 +20,18 @@
           <div class="container">
               <div class="row align-items-center">
                   <div class="col-lg-6 " data-aos="fade-up">
-                      <h1 style="" class="page-header-title font-weight-bold">Let’s Wow your online presence</h1>
+                      <h2 style="" class="page-header-title font-weight-bold">Sigue tus intereses <br/><br/> Diseña tu futuro Profesional <br/><br/> Persigue tus sueños profesionales </h2>
                       <br>
                       <p class="page-header-text mb-5">
-                        Surround yourself with people who are going to lift you higher. Join today and share your thoughts.
-                        <br><br>
-                        Designed and developed by <a target="_blank" href="https://github.com/Ronik22">Ronik Bhattacharjee</a>
+                        Diseñado y Desarrollado por <a target="_blank" href="https://github.com/Cris904">Cris904</a>
                       </p>
 
                       {% if user.is_authenticated %}
-                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'posts-follow-view' %}">Get Started</a>
-                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="#"><i class="far fa-check-circle"></i>&nbsp;LOGGED IN</a>
+                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'posts-follow-view' %}">Comenzar</a>
+                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="#"><i class="far fa-check-circle"></i>&nbsp;CONECTADO</a>
                       {% else %}
-                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'register' %}">REGISTER</a>
-                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="{% url 'account_login' %}">LOGIN</a>
+                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'register' %}">REGISTRATE</a>
+                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="{% url 'account_login' %}">INICIAR SESIÓN</a>
                       {% endif %}
                   </div>
                   <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="100"><img class="img-fluid" src="/static/blog/images/undraw_social_interaction_cy9i.png" /></div>
