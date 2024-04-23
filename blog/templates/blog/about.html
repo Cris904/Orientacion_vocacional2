@@ -3,14 +3,887 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
+<style>
+    /* Estilos generales */
+    body {
+        font-family: Arial, sans-serif;
+    }
 
-<div class="col-md-8 m-auto">
-    <div class="content-section">
-        <h1>Acerca de...</h1>
-        <br>
-        <p>Creado &#128150; por Cristian Florez &#9996;</p>
-    </div>
+    /* Estilos para el contenedor principal */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Estilos para las preguntas y los botones de radio */
+    .question {
+        font-size: 18px;
+        margin-bottom: 20px;
+        display: flex; /* Mostrar en una sola línea */
+        align-items: center; /* Alinear verticalmente */
+    }
+
+    .question p {
+        margin-right: 20px;
+    }
+
+    .radio-container {
+        display: flex; /* Mostrar en una sola línea */
+        align-items: center; /* Alinear verticalmente */
+        flex-wrap: wrap; /* Permitir el ajuste de los elementos en múltiples líneas */
+    }
+
+    .radio-container label {
+        margin-right: 10px;
+        margin-bottom: 10px; /* Espacio entre los radio buttons */
+        font-size: 16px;
+    }
+
+    /* Estilos para los botones de navegación */
+    .navigation-btn {
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .navigation-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div id="page1" class="page">
+            <h2>Página 1</h2>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">La interacción social me cansa...</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q1" value="canso6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >La interacción social me estimula</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero salir en grupo para compartir experiencias y crear recuerdos juntos.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center">  
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="grupo6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero salir solo para disfrutar de mi tiempo a solas y recargar energías.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Es posible que paso demasiado tiempo a pensar sin pasar bastante rápido a la acción.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="tiempo6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >Es posible que paso a la acción sin tener suficiente pensado.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero actividades que me hacen mover.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="mover6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >Prefiero actividades que me hacen pensar.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero comunicar oralmente.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center">  
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q5" value="oralmente6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero comunicar por escrito.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero encontrar nuevas personas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q6" value="nuevas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >Prefiero profundizar mis contactos.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero debatir un tema no privado cara a cara.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center">  
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q7" value="debate6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero debatir un tema no privado en grupo.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero pasar una tarde solo con un allegado.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q8" value="tarde6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >Prefiero pasar una tarde con más personas.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">En general, soy bastante percibido como alguien pensativo y reservado.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q9" value="reservado6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >En general, soy bastante percibido como alguien de dinámico y abierto.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero trabajar en grupo con más personas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q10" value="trabajo6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100" >Prefiero trabajar solo o con una sola persona.</p>
+                    </div> 
+                </div>
+            </div>
+            <!-- Repite esta estructura para cada par de frases -->
+        </div>
+
+        <div id="page2" class="page">
+            <h2>Página 2</h2>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero dar la prioridad en las ideas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="ideas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero dar la prioridad en los hechos.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Me concentro en lo que podría ser.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Soy realista, veo la realidad como es.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Me recuerdo de la mayoría de los detalles que he observado.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="detalles6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Me recuerdo detalles cuando tienen una conexión con el esquema general.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero confiar en mi inspiración.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="inspiracion6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero confiar en mi experiencia.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero concentrarme en el momento presente y en lo que llega.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="concentrarme6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero pensar en lo que podría llegar.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Puedo tener dificultades para creer en esas historias si no las he experimentado personalmente.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="historias6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">No tengo absolutamente ninguna dificultad para creer en historias esotéricas (por ejemplo, historias sobrenaturales).</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero utilizar nuevos métodos.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="metodos6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero utilizar métodos seguros y probados.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero considerar globalmente los aspectos de un mismo punto.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="aspectos6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero considerar en detalle todos los aspectos de un mismo punto.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero hablar sobre temas concretos y reales.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="temas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero hablar sobre temas abstractos o teóricos.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Resuelvo los problemas basándome en mi experiencia pasada, lo que ha funcionado antes.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q2" value="problemas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Resuelvo los problemas en depender de mi imaginación.</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <h2>Página 3</h2>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ser diplomático y actuar con mucho tacto.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="diplomatico6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ser honesto y directo.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ayudar a otros a tomar decisiones lógicas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="logicas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ayudar a otros a expresar sus sentimientos.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero utilizar mi capacidad analítica de las situaciones.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="analitica6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero asistir a situaciones o discusiones donde hay emoción.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero adaptarme en elementos verificables para tomar mis decisiones.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="adaptarme6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero utilizar mis convicciones y lo que siento para tomar mis decisiones.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero extraer conclusiones basadas en la lógica y un análisis minucioso.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="conclusiones6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero extraer conclusiones basadas en lo que siento y lo que conozco de la vida.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Intento agradar a los demás.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="agradar6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Soy naturalmente crítico.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ser leal y justo.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="leal6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ser caluroso y amistoso.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Cuando un problema se plantea, me pregunto principalmente si es importante.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="problema6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Cuando un problema se plantea, me pregunto principalmente si es verdad.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Valoro el impacto de mis decisiones sobre otros.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="impacto6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Resuelvo mis problemas con lógica.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Decido con mis valores personales ("está bien" o "está mal") y mis sentimientos ("me gusta" o "no me gusta").</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q3" value="valores6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Decido analizando las causas y los efectos a partir de criterios objetivos de verdad. ("Verdadero" o "falso").</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div id="page4" class="page">
+            <h2>Página 4</h2>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero obtener todas las informaciones que necesito sobre un tema, considerarlo un tiempo además tomar una decisión rápida y definitiva.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="informacion6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero tomar un momento para considerar todos los posibles elementos de un asunto antes y después de haber tomado mi decisión.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero el cambio y mantener las opciones abiertas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="cambio6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero la constancia y saber lo que se puede pasar con antelación.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero que las cosas sean muy organizadas.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="organizadas6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero que las cosas puedan llegar por sí solas.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Privilegio mi capacidad para estar metódico y organizado.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="metodico6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Privilegio mi capacidad de adaptarme.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Me gusta planificar mi vida y controlarla.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="planificar6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Intento comprender más que a controlar.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Confío más en mi poder de planificación que en mi poder de improvisación.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="confiar6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Confío más en mi poder de improvisación que en mi poder de planificación.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero controlar mi entorno.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="controlar6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero acomodarme a mi entorno.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero buscar informaciones.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="buscar6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero tomar decisiones.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">No tiendo a volver sobre lo que decidí, pasé por el siguiente paso.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="volver6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Tiendo a seguir buscando y reconsiderando informaciones aunque las cosas ya han sido establecidas.</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="container-fluid question">
+                <div class="row align-items-center justify-content-center"> 
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero ejercer presión para que los compromisos sean concretos.</p>
+                    </div>
+                    <div class="d-flex col-sm justify-content-center align-items-center"> 
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion1"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion2"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion3"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion4"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion5"></label>
+                        <label><input class="m-2" style="width: 25px; height: 25px;" type="radio" name="q4" value="presion6"></label>
+                    </div>
+                    <div class="col-sm">
+                        <p class="w-100">Prefiero comprometerme si los otros se comprometen también.</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div id="page5" class="page">
+   <h2>Apartado Tecnico</h2>
+   <div class="container-fluid question">
+      <p>¿Qué área de conocimiento le interesa?</p>
+      <div class="radio-container">
+         <label><input type="checkbox" name="area" value="Matemáticas"> Matemáticas</label>
+         <label><input type="checkbox" name="area" value="Artes y Humanidades"> Artes y Humanidades</label>
+         <label><input type="checkbox" name="area" value="Idiomas"> Idiomas</label>
+         <label><input type="checkbox" name="area" value="Ciencias sociales y comunicación"> Ciencias sociales y comunicación</label>
+         <label><input type="checkbox" name="area" value="Salud y Medicina"> Salud y Medicina</label>
+         <label><input type="checkbox" name="area" value="Biología"> Biología</label>
+         <label><input type="checkbox" name="area" value="Tecnología y Computación"> Tecnología y Computación</label>
+         <label><input type="checkbox" name="area" value="Otros"> Otros</label>
+      </div>
+   </div>
+   <div class="container-fluid question">
+      <p>¿Qué tipo de tareas disfrutas realizar?</p>
+      <div class="radio-container">
+         <label><input type="checkbox" name="tasks" value="Resolver problemas técnicos y Científicos"> Resolver problemas técnicos y Científicos</label>
+         <label><input type="checkbox" name="tasks" value="Trabajar con tecnología y desarrollo de software"> Trabajar con tecnología y desarrollo de software</label>
+         <label><input type="checkbox" name="tasks" value="Trabajar con personas y ayudar a otros"> Trabajar con personas y ayudar a otros</label>
+         <label><input type="checkbox" name="tasks" value="Expresar ideas a través del arte y corrientes artísticas"> Expresar ideas a través del arte y corrientes artísticas</label>
+         <label><input type="checkbox" name="tasks" value="Trabajar en la industria del entretenimiento y medios"> Trabajar en la industria del entretenimiento y medios</label>
+         <label><input type="checkbox" name="tasks" value="Trabajar en estrategia y seguridad militar"> Trabajar en estrategia y seguridad militar</label>
+      </div>
+   </div>
+   <div class="container-fluid question">
+      <p>¿Qué tipo de habilidades te sientes más cómodo desarrollando?</p>
+      <div class="radio-container">
+         <label><input type="checkbox" name="skills" value="Análisis y comprensión de datos"> Análisis y comprensión de datos</label>
+         <label><input type="checkbox" name="skills" value="Creatividad y destreza artística"> Creatividad y destreza artística</label>
+         <label><input type="checkbox" name="skills" value="Comunicación"> Comunicación</label>
+         <label><input type="checkbox" name="skills" value="Investigación y estudio de doctrinas religiosas"> Investigación y estudio de doctrinas religiosas</label>
+         <label><input type="checkbox" name="skills" value="Liderazgo y gestión de equipos"> Liderazgo y gestión de equipos</label>
+         <label><input type="checkbox" name="skills" value="Manualidades"> Manualidades</label>
+         <label><input type="checkbox" name="skills" value="Gestión de Proyectos"> Gestión de Proyectos</label>
+         <label><input type="checkbox" name="skills" value="Negociación y Persuasión"> Negociación y Persuasión</label>
+         <label><input type="checkbox" name="skills" value="Transformación Digital"> Transformación Digital</label>
+         <label><input type="checkbox" name="skills" value="Lingüísticas y de traducción"> Lingüísticas y de traducción</label>
+         <label><input type="checkbox" name="skills" value="Investigación y estudio de doctrinas religiosas"> Investigación y estudio de doctrinas religiosas</label>
+         <label><input type="checkbox" name="skills" value="Manejo de ciencias exactas"> Manejo de ciencias exactas</label>
+         <label><input type="checkbox" name="skills" value="Observación y comprensión del comportamiento humano"> Observación y comprensión del comportamiento humano</label>
+         <label><input type="checkbox" name="skills" value="Interpretación y aplicación de leyes"> Interpretación y aplicación de leyes</label>
+         <label><input type="checkbox" name="skills" value="Mejora continua y gestión del tiempo"> Mejora continua y gestión del tiempo</label>
+         <label><input type="checkbox" name="skills" value="Investigación y desarrollo de técnicas agrícolas"> Investigación y desarrollo de técnicas agrícolas</label>
+         <label><input type="checkbox" name="skills" value="Análisis cultural e investigación de grupos étnicos"> Análisis cultural e investigación de grupos étnicos</label>
+         <label><input type="checkbox" name="skills" value="Conservación y restauración de sitios y objetos arqueológicos"> Conservación y restauración de sitios y objetos arqueológicos</label>
+         <label><input type="checkbox" name="skills" value="Análisis forense y recolección de evidencias"> Análisis forense y recolección de evidencias</label>
+         <label><input type="checkbox" name="skills" value="Conciencia espacial"> Conciencia espacial</label>
+         <label><input type="checkbox" name="skills" value="Planeación estructural de edificaciones"> Planeación estructural de edificaciones</label>
+      </div>
+   </div>
+   <!-- Fin del apartado técnico -->
+</div>
+</div>
+        <!-- Puedes añadir más páginas si es necesario -->
+
+        <button type="button" class="navigation-btn" id="prevBtn" onclick="prevPage()">Anterior</button>
+        <button type="button" class="navigation-btn" id="nextBtn" onclick="nextPage()">Siguiente</button>
+    </form>
 </div>
 
+<script>
+    var currentPage = 1;
+    showPage(currentPage);
+
+    function nextPage() {
+        if (currentPage < 5) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    }
+
+    function showPage(page) {
+        var i;
+        var pages = document.getElementsByClassName("page");
+        for (i = 0; i < pages.length; i++) {
+            pages[i].style.display = "none";
+        }
+        pages[page - 1].style.display = "block";
+    }
+</script>
 
 {% endblock %}

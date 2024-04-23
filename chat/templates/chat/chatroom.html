@@ -11,18 +11,17 @@
     <div class="bg-gray py-1 px-3">
         <p class="h5 mb-0 py-2">  
             <span class="img-cont2">              
-                <img src="{{friend_name.profile.image.url}}" alt="user" width="50" height="50" class="rounded-circle">
+                <img src="{{ friend_name.profile.image.url }}" alt="user" width="50" height="50" class="rounded-circle">
                 {% if friend_name.profile.is_online %}
                     <span class="online-circle3"></span>  
                 {% else %}
                     <span class="offline-circle3"></span>
                 {% endif %}
             </span>
-            &nbsp;&nbsp;{{friend_name}}
+            &nbsp;&nbsp;{{ friend_name }}
         </p>
         <hr>
     </div>
-
 
     <!-- Chat Box-->
     <div id="chat-section" class="px-0">
@@ -32,34 +31,32 @@
                 {% if chat.author != request.user %}
                 <!-- Sender Message-->
                 <div class="media w-75 mb-3">
-                <img src="{{chat.author.profile.image.url}}" alt="user" width="40" height="40" class="rounded-circle">
+                <img src="{{ chat.author.profile.image.url }}" alt="user" width="40" height="40" class="rounded-circle">
                 <div class="media-body ml-3">
                     <div class="bg-light rounded py-2 px-3 mb-2">
-                    <p class="text-small mb-0 text-muted">{{chat.text}}</p>
+                    <p class="text-small mb-0 text-muted">{{ chat.text }}</p>
                     </div>
-                    <p class="small text-muted">{{chat.date}}</p>
+                    <p class="small text-muted">{{ chat.date }}</p>
                 </div>
                 </div>
                 
                 {% else %}
 
-                <!-- Reciever Message-->
+                <!-- Receiver Message-->
                 <div class="media w-75 ml-auto mb-3">
                 <div class="media-body">
                     <div class="bg-primary rounded py-2 px-3 mb-2">
-                    <p class="text-small mb-0 text-white">{{chat.text}}</p>
+                    <p class="text-small mb-0 text-white">{{ chat.text }}</p>
                     </div>
-                    <p class="small text-muted">{{chat.date}}</p>
+                    <p class="small text-muted">{{ chat.date }}</p>
                 </div>
                 </div>
                 
                 {% endif %}
-
             {% endfor %}
         </div>
     </div>
     <br>
-
 
     <div class="px-0">
         <!-- Typing area -->
@@ -79,153 +76,120 @@
 
 <br>
 
-<!-- SIDEBAR -->
-<!-- <div class="col-md-4">
-    <div class="content-section">
-        <h3>Our Sidebar</h3>
-        <p class="text-muted">You can put any information here you'd like.
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-            </ul>
-        </p>
-    </div>
-</div>   -->
-
-
 {% endblock %}
 
 {% block script %}
-
     {{ request.user.username|json_script:"user_username" }}
     {{ room_name|json_script:"room-name" }}
-    {{ request.user.profile.image.url|json_script:"user_image"}}
+    {{ request.user.profile.image.url|json_script:"user_image" }}
     <script>
-        // $(document).ready(function(event){
-        //     $("#chat-box").scrollTop($("#chat-box").scrollHeight);
-        // });
-        document.querySelector('#input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.querySelector('#submit').click();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const my_name = '{{ request.user.username }}';
+            const user_username = JSON.parse(document.getElementById('user_username').textContent);
+            const user_image = JSON.parse(document.getElementById('user_image').textContent);
+            const roomName = '{{ room_name }}';
+
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+            const chatSocket = new WebSocket(
+                wsProtocol +
+                window.location.host +
+                '/ws/chat/' +
+                roomName +
+                '/'
+            );
+
+            chatSocket.onopen = function(event) {
+                console.log('WebSocket connected!');
+            };
+
+            chatSocket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+            };
+
+            chatSocket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                console.log(data);
+                
+                if (data.username !== my_name)
+                    addSenderChat(data);
+                else
+                    addReceiverChat(data);
+            };
+
+            document.querySelector('#submit').onclick = function (e) {
+                const messageInputDom = document.querySelector('#input');
+                const message = messageInputDom.value.trim();
+                if(message.length !== 0) {
+                    chatSocket.send(JSON.stringify({
+                        'message': message,
+                        'username': user_username,
+                        'user_image': user_image,
+                    }));
+                    messageInputDom.value = '';
+                    messageInputDom.focus();
+                } else {
+                    alert("Message cannot be blank");
+                    messageInputDom.focus();
+                }
+            };
         });
 
-        let my_name = '{{ my_name }}';
-        const user_username = JSON.parse(document.getElementById('user_username').textContent);
-        const user_image = JSON.parse(document.getElementById('user_image').textContent);
-        document.querySelector('#submit').onclick = function (e) {
-            const messageInputDom = document.querySelector('#input');
-            const message = messageInputDom.value;
-            if(message.trim().length!=0) {
-                chatSocket.send(JSON.stringify({
-                    'message': message,
-                    'username': user_username,
-                    'user_image': user_image,
-                }));
-                messageInputDom.value = '';
-                messageInputDom.focus();
-            }
-            else{
-                alert("Message cannot be blank");
-                messageInputDom.focus();
-            }
-        };
+        function addSenderChat(data) {
+            const chatWindow = document.querySelector('.chat-text-add');
+            const message = document.createElement('div');
+            message.classList.add('media', 'w-75', 'mb-3');
+            chatWindow.appendChild(message);
 
+            const image = document.createElement('img');
+            image.src = String(data.user_image);
+            image.classList.add('rounded-circle');
+            image.width = 40;
+            image.height = 40;
+            image.alt = data.username;
+            message.appendChild(image);
 
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+            const textDiv = document.createElement('div');
+            textDiv.classList.add('media-body', 'ml-3');
+            message.appendChild(textDiv);
 
-        const chatSocket = new WebSocket(
-            'ws://' +
-            window.location.host +
-            '/ws/chat/' +
-            roomName +
-            '/'
-        );
+            const textDivDiv = document.createElement('div');
+            textDivDiv.classList.add('bg-light', 'rounded', 'py-2', 'px-3', 'mb-2');
+            textDiv.appendChild(textDivDiv);
 
-        chatSocket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            console.log(data)
-            
-            if (data.username != my_name)
-                add_sender_chat(data)
-            else
-                add_receiver_chat(data)
+            const textDivDivP = document.createElement('p');
+            textDivDivP.classList.add('text-small', 'mb-0', 'text-muted');
+            textDivDivP.innerHTML = data.message;
+            textDivDiv.appendChild(textDivDivP);
+
+            const textDivDate = document.createElement('p');
+            textDivDate.classList.add('small', 'text-muted');
+            textDivDate.innerHTML = new Date().toLocaleString();
+            textDiv.appendChild(textDivDate);
         }
 
+        function addReceiverChat(data) {
+            const chatWindow = document.querySelector('.chat-text-add');
+            const message = document.createElement('div');
+            message.classList.add('media', 'w-75', 'ml-auto', 'mb-3');
+            chatWindow.appendChild(message);
 
-        function add_sender_chat(data) {
-            
-            var chat_window = document.querySelector('.chat-text-add')
-            var message = document.createElement('div')
-            message.classList.add('media', 'w-75', 'mb-3')
-            chat_window.appendChild(message)
+            const textDiv = document.createElement('div');
+            textDiv.classList.add('media-body');
+            message.appendChild(textDiv);
 
-            var image = document.createElement('img')
-            image.src = String(data.user_image)
-            image.classList.add('rounded-circle')
-            image.width = 40
-            image.height = 40
-            image.alt = data.username
-            message.appendChild(image)
+            const textDivDiv = document.createElement('div');
+            textDivDiv.classList.add('bg-primary', 'rounded', 'py-2', 'px-3', 'mb-2');
+            textDiv.appendChild(textDivDiv);
 
-            var text_div = document.createElement('div')
-            text_div.classList.add('media-body', 'ml-3')
-            message.appendChild(text_div)
+            const textDivDivP = document.createElement('p');
+            textDivDivP.classList.add('text-small', 'mb-0', 'text-white');
+            textDivDivP.innerHTML = data.message;
+            textDivDiv.appendChild(textDivDivP);
 
-            var text_div_div = document.createElement('div')
-            text_div_div.classList.add('bg-light', 'rounded', 'py-2', 'px-3', 'mb-2')
-            text_div.appendChild(text_div_div)
-
-            var text_div_div_p = document.createElement('p')
-            text_div_div_p.classList.add('text-small', 'mb-0', 'text-muted')
-            text_div_div_p.innerHTML = data.message
-            text_div_div.appendChild(text_div_div_p)
-
-            text_div_date = document.createElement('p')
-            text_div_date.classList.add('small', 'text-muted')
-            text_div_date.innerHTML = new Date().toLocaleString()
-            text_div.appendChild(text_div_date)
-
+            const textDivDate = document.createElement('p');
+            textDivDate.classList.add('small', 'text-muted');
+            textDivDate.innerHTML = new Date().toLocaleString();
+            textDiv.appendChild(textDivDate);
         }
-
-        function add_receiver_chat(data){
-            var chat_window = document.querySelector('.chat-text-add')
-
-            var message = document.createElement('div')
-            message.classList.add('media', 'w-75', 'ml-auto', 'mb-3')
-            chat_window.appendChild(message)
-
-            var text_div = document.createElement('div')
-            text_div.classList.add('media-body')
-            message.appendChild(text_div)
-
-            var text_div_div = document.createElement('div')
-            text_div_div.classList.add('bg-primary', 'rounded', 'py-2', 'px-3', 'mb-2')
-            text_div.appendChild(text_div_div)
-
-            var text_div_div_p = document.createElement('p')
-            text_div_div_p.classList.add('text-small', 'mb-0', 'text-white')
-            text_div_div_p.innerHTML = data.message
-            text_div_div.appendChild(text_div_div_p)
-
-            text_div_date = document.createElement('p')
-            text_div_date.classList.add('small', 'text-muted')
-            text_div_date.innerHTML = new Date().toLocaleString()
-            text_div.appendChild(text_div_date)
-
-            // var image = document.createElement('img')
-            // image.src = '{{my_name.profile.image.url}}'
-            // image.classList.add('rounded-circle','ml-2')
-            // image.width = 40
-            // image.height = 40
-            // message.appendChild(image)
-
-        }
-
     </script>
-
-
 {% endblock %}

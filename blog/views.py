@@ -291,6 +291,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
+def maps(request):
+    return render(request, 'blog/maps.html', {'title':'maps'})
 
 """ Search by post title or username """
 def search(request):

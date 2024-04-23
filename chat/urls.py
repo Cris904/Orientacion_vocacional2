@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.room_enroll, name='room-enroll'),
     path('chat/<int:friend_id>', views.room_choice, name='room-choice'),
     path('room/<int:room_name>-<int:friend_id>', views.room, name='room'),
+    path('ws/chat/<int:room_name>/', views.ChatConsumer.as_asgi()),
 ]
