@@ -1,7 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-steel fixed-top" >
     <div class="container-fluid">
-      <a class="navbar-brand pr-3" href="/">Word-Bucket</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand pr-3" href="/">
+        <div class="d-flex align-items-center">
+            <img class="img-fluid mr-2" src="/static/blog/images/tq.png" alt="Talent Quest" style="max-height: 30px;">
+            <span>Talent Quest</span>
+        </div>
+    </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarToggle">
@@ -14,15 +19,11 @@
             </form>
           </div>
         </div>
-        
-        
-        
         <div class="navbar-nav mr-3">
-          <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-          <a class="nav-item nav-link" href="{% url 'blog-about' %}">Acerca de</a>
-          <a class="nav-item nav-link" href="{% url 'blog-maps' %}">Mapas</a>
-
           {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'blog-about' %}">Formulario</a>
+          <a class="nav-item nav-link" href="{% url 'blog-maps' %}">Mapas</a>
           <a class="nav-item nav-link" href="{% url 'show-notifications' %}">Notificaciones</a>
           <a class="nav-item nav-link" href="{% url 'room-enroll' %}">Chats</a>
           <!-- <a class="nav-item nav-link" href="{% url 'vc-lobby' %}">Calls</a> -->
