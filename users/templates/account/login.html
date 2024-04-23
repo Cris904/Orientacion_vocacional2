@@ -38,38 +38,38 @@
     <form action="" method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Login</legend>
+            <legend class="border-bottom mb-4">Inicio Sesión</legend>
             {{form|crispy}}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Login</button>
+            <button class="btn btn-outline-info" type="submit">Iniciar sesión</button>
             <small class="text-muted ml-2">
-                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                <a href="{% url 'password_reset' %}">¿Ha olvidado su contraseña?</a>
             </small>
         </div>
     </form>
     <div class="or-container">
         <div class="line-separator"></div>
-        <div class="or-label">or</div>
+        <div class="or-label">o</div>
         <div class="line-separator"></div>
     </div>
     <div class="row">
         <div class="col-md-12"> 
             <a class="btn btn-lg btn-google btn-block btn-outline" href="{% provider_login_url 'google' %}">
-                <img src="https://img.icons8.com/color/22/000000/google-logo.png"> Sign In with <b>Google</b>
+                <img src="https://img.icons8.com/color/22/000000/google-logo.png"> Iniciar sesión con <b>Google</b>
             </a> 
         </div>
     </div> <br>
     <div class="row">
         <div class="col-md-12"> 
             <a class="btn btn-lg btn-google btn-block btn-outline" href="{% provider_login_url 'github' %}">
-                <img src="https://img.icons8.com/material-sharp/24/000000/github.png"/> Sign In with <b>Github</b>
+                <img src="https://img.icons8.com/material-sharp/24/000000/github.png"/> Iniciar sesión con <b>Github</b>
             </a> 
         </div>
     </div> <br>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Need an Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+            ¿Necesita una cuenta? <a class="ml-2" href="{% url 'register' %}">¡Registrare ahora!</a>
         </small>
     </div>
 </div>

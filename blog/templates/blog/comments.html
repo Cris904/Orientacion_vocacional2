@@ -5,22 +5,22 @@
     <form class="comment-form" method="post" action=".">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class=" mb-4">Add Comment</legend>
+            <legend class=" mb-4">Agregar comentario</legend>
             <textarea required style="width: 100%;" name="body" id="cmtbody" cols="40" rows="5"></textarea>
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" id="acsubmit" type="submit">Add Comment</button>
+            <button class="btn btn-outline-info" id="acsubmit" type="submit">Agregar</button>
         </div>
     </form>
 {% endif %}
 
 <br>
 
-<h3>Comments ({{ comments.count }}) :</h3>
+<h3>Comentarios ({{ comments.count }}) :</h3>
 <hr>
 <br>
 {% if not comments %}
-    No Comments Yet...
+    Sin comentarios aún...
 {% else %}
     
     {% for comment in comments %}
@@ -76,11 +76,11 @@
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{comment.id}}">
                             <fieldset class="form-group">
-                                <legend class="h5 mb-4">Replies :</legend>
+                                <legend class="h5 mb-4">Respuestas:</legend>
                                 <textarea required style="width: 100%;" name="body" id="cmt-body" cols="40" rows="2"></textarea>
                             </fieldset>
                             <div class="form-group">
-                                <button class="btn btn-outline-info" type="submit">Reply</button>
+                                <button class="btn btn-outline-info" type="submit">Responder</button>
                             </div>
                         </form>
                     {% endif %}

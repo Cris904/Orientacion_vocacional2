@@ -34,7 +34,7 @@
 
 <div class="m-auto col-md-8">
 <div class="content-section">
-    <h3 class="border-bottom pb-3 mb-4">Join Today</h3>
+    <h3 class="border-bottom pb-3 mb-4">Únete hoy</h3>
 
     <form action="" method="POST">
         {% csrf_token %}
@@ -52,12 +52,12 @@
             <input type="hidden" id="privacyAccepted" name="privacy_accepted">
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit" id="submitBtn" disabled>Sign Up</button>
+            <button class="btn btn-outline-info" type="submit" id="submitBtn" disabled>Registrate</button>
         </div>
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Already Have an Account? <a class="ml-2" href="{% url 'account_login' %}">Sign In</a>
+            ¿Ya tiene una cuenta? <a class="ml-2" href="{% url 'account_login' %}">Iniciar Sesión</a>
         </small>
     </div>
 </div>
