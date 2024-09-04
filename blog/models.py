@@ -45,3 +45,19 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={"pk":self.pk})
 
+class City(models.Model):
+    id = models.AutoField(primary_key=True ,db_column='idciudad')
+    city_name = models.CharField(max_length=255, db_column='nombre_ciudad')
+
+    class Meta:
+        db_table = 'ciudad'
+
+class University(models.Model):
+    id = models.AutoField(primary_key=True, db_column='idcoordenada')
+    university_name = models.CharField(max_length=255,db_column='nombre')
+    latitude = models.FloatField(db_column='latitud')
+    longitude = models.FloatField(db_column='longitud')
+    idciudad = models.ForeignKey(City, on_delete=models.CASCADE, db_column='idciudad')
+
+    class Meta:
+        db_table = 'coordenadas'
