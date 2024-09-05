@@ -3,6 +3,9 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
+
+{{universities|json_script:"universities-json"}}
+
 <div class="col-md-8 m-auto">
     <div class="content-section">
         <h1>MAPA DE UNIVERSIDADES</h1>

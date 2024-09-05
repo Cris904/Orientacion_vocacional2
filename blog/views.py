@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Comment, Post
+from .models import Comment, Post ,University
 from .forms import CommentForm
 from django.http import HttpResponseRedirect, JsonResponse
 from users.models import Profile
@@ -16,6 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
 import random
 from blog.utils import is_ajax
+from django.core import serializers
 
 
 """ Home page with all posts """
@@ -292,7 +293,11 @@ def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
 def maps(request):
-    return render(request, 'blog/maps.html', {'title':'maps'})
+    context = {
+        'title': 'Maps',
+        'universities': list(University.objects.values('latitude','longitude','university_name'))
+    }
+    return render(request, 'blog/maps.html', context)
 
 """ Search by post title or username """
 def search(request):
