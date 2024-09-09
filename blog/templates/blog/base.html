@@ -63,6 +63,12 @@
               var scriptElement = document.getElementById('universities-json');
               var universitiesJson = scriptElement.textContent || scriptElement.innerText;
               var universities = JSON.parse(universitiesJson);
+              var redIcon = L.icon({//icono de la ubicacion del usuario
+                iconUrl: "{% static 'blog/images/icon_ubication.svg' %}",
+                iconSize: [24, 36],
+                iconAnchor: [12, 36],
+                popupAnchor: [0, -36]
+              });
 
               // Utilizar la API de geolocalización del navegador para obtener la ubicación del usuario
               if (navigator.geolocation) {
@@ -72,6 +78,20 @@
       
                       // Configurar el mapa para centrarse en la ubicación del usuario
                       mymap.setView([userLat, userLon], 13);
+
+                      //solicitar al usuario la ubicación 
+                      mymap.locate({});
+                      mymap.on('locationfound', function(e) {
+                      L.marker(e.latlng,{icon:redIcon}).addTo(mymap)
+                        .bindPopup("<b>Mi ubicación</b>")
+                        .openPopup();        
+                        L.circle(e.latlng, {color: 'red',fillColor: '#f03',fillOpacity: 0.5,radius: e.accuracy/2}).addTo(mymap);
+                      });
+                      
+                      //si se genera un error en la ubicación, lo muestra en pantalla
+                      mymap.on('locationerror', function(e) {
+                        alert("Unable to retrieve your location.");
+                      });
       
                       // Agregar una capa de mapa base
                       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
