@@ -53,15 +53,14 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            # Si el formulario es válido, no hacemos nada aquí.
-            # La validación del reCAPTCHA se realizará en el lado del cliente.
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f"Your account has been created! You can login now")
             return redirect('login')
+        
+        else:
+            return render(request, 'users/register.html', {'form': form})
     else:
         form = UserRegisterForm()
-
     return render(request, 'users/register.html', {'form': form})
 
 """ User profile """
