@@ -1,0 +1,120 @@
+.btn-custom {
+    border-radius: 9999px;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    width: 180px;
+    white-space: nowrap;
+    text-decoration: none; 
+}
+
+.btn-custom:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    background-color: #1f4f47;
+    color: white;
+    text-decoration: none; 
+}
+
+.btn-custom:active {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    text-decoration: none; 
+}
+
+.btn-custom-login, .btn-custom-register {
+    width: 180px;
+    border-width: 3px;
+    text-decoration: none; 
+}
+
+.btn-custom-login {
+    background: #286C63;
+    color: white;
+    border: 3px solid white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none; 
+}
+
+.btn-custom-login:hover {
+    background-color: #1f4f47;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    text-decoration: none; 
+}
+
+.btn-custom-register {
+    background: white;
+    color: #286C63;
+    border: 3px solid #286C63;
+    padding: 10px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none; 
+}
+
+.btn-custom-register:hover {
+    background-color: #f0f0f0;
+    color: #1f4f47;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    text-decoration: none; 
+}
+
+.talent-quest-text {
+    color: white;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-shadow: 
+      1px 1px 2px #000,  
+      2px 2px 4px #000,
+      3px 3px 6px #000;
+    text-align: center;
+}
+
+.nav-item-hover {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item-hover:hover {
+    color: #1f4f47 !important;
+    transform: scale(1.1);
+}
+
+.navbar-bottom-line {
+    height: 2px;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    .btn-custom {
+      font-size: 14px;
+      padding: 8px 16px;
+      width: 100%;
+    }
+
+    .navbar-nav {
+      text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+      margin: 0.5rem 0;
+    }
+}

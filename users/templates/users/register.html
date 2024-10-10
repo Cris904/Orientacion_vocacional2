@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,157 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/register.css' %}">
     <style>
-        body {
-            background-color: #286C63;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-        }
-        .container {
-            display: flex;
-            justify-content: center;    
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-        }
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .arrow-back {
-            align-self: flex-start;
-            margin-bottom: 20px;
-        }
-        .arrow-back i {
-            color: #286C63;
-            font-size: 2em;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .arrow-back i:hover {
-            color: #1f504d;
-            transform: translateX(-5px);
-        }
-        .input-container {
-            margin-bottom: 20px;
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 auto;
-        }
-        .input-container label {
-            display: block;
-            margin-bottom: 5px;
-            width: 100%;
-            color: black;
-            font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            word-wrap: break-word;
-            text-align: left;
-        }
-        .input-container input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #286C63;
-            border-radius: 20px;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        .name-row {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            margin: 0 auto;
-        }
-        .first-name-container {
-            width: 100%;
-            margin-right: 20px;
-        }
-        .last-name-container {
-            width: 100%;
-            margin-left: 20px;
-        }    
-        .checkbox-container {
-            margin-bottom: 15px;
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin: 0 auto;
-        }
-        .checkbox-container label {
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-        .login-link {
-            margin-top: 20px;
-            text-align: left;
-            width: 80%;
-            font-size: 0.75rem;
-            margin-bottom: 10px;
-            margin-top: 20px;
-        }
-        .login-link a {
-            color: #286C63;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .register-button {
-            width: 485px;
-            height: 60px;
-            position: relative;
-            cursor: not-allowed;
-            border-radius: 30px;
-            overflow: hidden;
-            background-color: #ccc;
-            border: none;
-            margin: 0 auto;
-            color: white;
-            font-size: 20px;
-            font-family: 'Inter';
-            font-weight: 700;
-            word-wrap: break-word;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .register-button:enabled {
-            cursor: pointer;
-            background-color: #286C63;
-        }
-        .register-button:enabled:hover {
-            background-color: #1f504d;
-            transform: scale(1.05);
-        }
-        .captcha-container {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0 15px 0;
-        }
-        .error-message {
-            color: red;
-            font-size: 0.9rem;
-            display: none;
-        }
-        .username-exists-error {
-            color: red;
-            display: inline;
-        }
     </style>
 </head>
 <body>
@@ -172,12 +24,10 @@
                         <div class="input-container first-name-container">
                             <label for="id_first_name">Nombres</label>
                             <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
-                            <span id="first_name_error" class="error-message">El nombre es obligatorio.</span>
                         </div>
                         <div class="input-container last-name-container">
                             <label for="id_last_name">Apellidos</label>
                             <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
-                            <span id="last_name_error" class="error-message">Los apellidos son obligatorios.</span>
                         </div>
                     </div>
                     
@@ -190,19 +40,16 @@
                     <div class="input-container">
                         <label for="id_email">Correo</label>
                         <input type="email" id="id_email" name="email" value="{{ form.email.value|default_if_none:'' }}">
-                        <span id="email_error" class="error-message">El correo es obligatorio.</span>
                     </div>
                     
                     <div class="input-container">
                         <label for="id_password1">Contraseña</label>
                         <input type="password" id="id_password1" name="password1">
-                        <span id="password_error" class="error-message">La contraseña es obligatoria y debe tener al menos 8 caracteres.</span>
                     </div>
                     
                     <div class="input-container">
                         <label for="id_password2">Confirme su contraseña</label>
                         <input type="password" id="id_password2" name="password2">
-                        <span id="confirm_password_error" class="error-message">Las contraseñas no coinciden.</span>
                     </div>
                     
                     <div class="checkbox-container">
@@ -226,83 +73,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-    function handlePrivacyCheckbox() {
-        var checkbox = document.getElementById("terms");
-        var submitBtn = document.getElementById("submitBtn");
-        var privacyAccepted = document.getElementById("privacyAccepted");
-
-        if (checkbox.checked && grecaptcha.getResponse()) {
-            submitBtn.disabled = false;
-            privacyAccepted.value = "accepted";
-        } else {
-            submitBtn.disabled = true;
-            privacyAccepted.value = "";
-        }
-    }
-
-    function recaptchaCallback() {
-        handlePrivacyCheckbox();
-    }
-
-    function validateForm(event) {
-        var isValid = true;
-
-        var firstName = document.getElementById("id_first_name").value.trim();
-        var lastName = document.getElementById("id_last_name").value.trim();
-        var username = document.getElementById("id_username").value.trim();
-        var email = document.getElementById("id_email").value.trim();
-        var password = document.getElementById("id_password1").value.trim();
-        var confirmPassword = document.getElementById("id_password2").value.trim();
-
-        if (firstName === "") {
-            document.getElementById("first_name_error").style.display = "inline";
-            isValid = false;
-        }
-
-        if (lastName === "") {
-            document.getElementById("last_name_error").style.display = "inline";
-            isValid = false;
-        }
-
-        if (username === "") {
-            document.getElementById("username_error").style.display = "inline";
-            isValid = false;
-        }
-
-        if (email === "") {
-            document.getElementById("email_error").style.display = "inline";
-            isValid = false;
-        }
-
-        if (password === "") {
-            document.getElementById("password_error").style.display = "inline";
-            isValid = false;
-        } else if (password.length < 8) {
-            document.getElementById("password_error").style.display = "inline";
-            isValid = false;
-        } else if (/^\d+$/.test(password)) {
-            document.getElementById("password_error").style.display = "inline";
-            document.getElementById("password_error").textContent = "La contraseña no puede ser solo numérica.";
-            isValid = false;
-        }
-
-        if (confirmPassword === "") {
-            document.getElementById("confirm_password_error").style.display = "inline";
-            isValid = false;
-        } else if (password !== confirmPassword) {
-            document.getElementById("confirm_password_error").style.display = "inline";
-            isValid = false;
-        }
-
-        if (!isValid) {
-            event.preventDefault();
-        }
-        return isValid;
-    }
-    </script>
-
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{% static 'users/js/register.js' %}"></script>
 </body>
 </html>

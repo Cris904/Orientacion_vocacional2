@@ -1,101 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
-    <style>
-        body {
-            background: #286C63;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-        }
-        .container {
-            width: 80%;
-            max-width: 400px;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .header {
-            text-align: center;
-            color: #286C63;
-            font-size: 3rem; /* Disminuye el tamaño de la fuente */
-            font-weight: 900; /* Aumenta el grosor del título */
-            margin-bottom: 40px;
-            letter-spacing: 0.01px; /* Ajusta la separación entre letras */
-        }
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: 900; /* Aumenta el grosor de los títulos de los cuadros de texto */
-            color: black;
-            margin-bottom: 10px;
-            padding-left: 15px; /* Ajusta la posición de las etiquetas */
-        }
-        .form-group input {
-            width: calc(100% - 30px);
-            padding: 15px;
-            font-size: 1rem;
-            border: 2px solid #286C63; /* Aumenta el grosor del borde */
-            border-radius: 25px;
-            box-sizing: border-box;
-            color: black;
-            display: block;
-            margin: 0 auto;
-        }
-        .btn {
-            width: calc(100% - 30px);
-            padding: 15px;
-            background: #286C63;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-sizing: border-box;
-            display: block;
-            margin: 0 auto;
-        }
-        .btn:hover {
-            background: #1f524d;
-        }
-        .register-link {
-            text-align: left;
-            margin-top: 25px;
-        }
-        .register-link a {
-            color: #286C63;
-            font-weight: 700;
-            text-decoration: none;
-        }
-        @media (max-width: 600px) {
-            .header {
-                font-size: 2rem; /* Ajusta el tamaño de la fuente para pantallas pequeñas */
-            }
-            .form-group label {
-                font-size: 1rem;
-            }
-            .form-group input {
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-            .btn {
-                padding: 12px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/login.css' %}">
+
 </head>
 <body>
     <div class="container">
