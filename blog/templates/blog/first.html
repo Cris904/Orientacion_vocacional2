@@ -4,43 +4,46 @@
 
 {% block content %}
 
-<!-- ADDITIONAL STYLING -->
+{% load static %}
 
-<style>
-  body{
-    background-color: #fff;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'blog/css/first.css' %}">
 
 <div>
-    
-    <!-- Page Hero-->
-    <section class=" page-header page-header-light bg-white mt-4 container">
-      <div class="page-header-content pt-5">
-          <div class="container">
-              <div class="row align-items-center">
-                  <div class="col-lg-6 " data-aos="fade-up">
-                      <h2 style="" class="page-header-title font-weight-bold">Sigue tus intereses <br/><br/> Diseña tu futuro Profesional <br/><br/> Persigue tus sueños profesionales </h2>
-                      <br>
-                      <p class="page-header-text mb-5">
-                        Diseñado y Desarrollado por <a target="_blank" href="https://github.com/Cris904">Cris904</a>
-                      </p>
-
-                      {% if user.is_authenticated %}
-                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'posts-follow-view' %}">Comenzar</a>
-                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="#"><i class="far fa-check-circle"></i>&nbsp;CONECTADO</a>
-                      {% else %}
-                        <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'register' %}">REGISTRATE</a>
-                        <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="{% url 'login' %}">INICIAR SESIÓN</a>
-                      {% endif %}
-                  </div>
-                  <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="100"><img class="img-fluid" src="/static/blog/images/undraw_social_interaction_cy9i.png" /></div>
+  <section class="page-header page-header-light bg-white container">
+    <div class="page-header-content pt-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 d-flex" data-aos="fade-up">
+            <div class="text-container">
+              <div class="center-container">
+                <div class="DescubreInspRateEnfCate animated-text">Descubre Inspírate Enfócate</div>
+                <br>
+                <div class="DiseATuFuturoProfesionalYPersigueTusSueOsProfesionales animated-text">
+                  Diseña tu futuro Profesional y persigue tus sueños profesionales
+                </div>
               </div>
-          </div>
-      </div>
-      <br>
-    </section>
+              <br>
+              <a href="{% url 'register' %}">
+                <div class="Group12 animated-button">
+                  <div class="Vector"></div>
+                  <div class="IniciaTuViajeAqu">INICIA TU VIAJE AQUÍ</div>
+                </div>
+              </a>
+              <br>
 
+              {% if user.is_authenticated %}
+                <a class="btn btn-lg btn-primary font-weight-bold mr-2 rounded-pill px-4 py-2" href="{% url 'posts-follow-view' %}">Comenzar</a>
+                <a class="btn btn-lg btn-primary-soft text-primary font-weight-bold" href="#"><i class="far fa-check-circle"></i>&nbsp;CONECTADO</a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="100">
+            <img class="Image3" src="static/blog/images/first_home.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 {% endblock %}

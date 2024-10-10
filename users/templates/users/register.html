@@ -1,82 +1,79 @@
-{% extends "blog/base.html" %}
-{% load crispy_forms_tags %}
-
-{% block title %}Register{% endblock %}
-
-{% block content %}
-
-<style>
-.btn-google {
-    color: #545454;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 1px #ddd
-}
-
-.or-container {
-    align-items: center;
-    color: #ccc;
-    display: flex;
-    margin: 25px 0
-}
-
-.line-separator {
-    background-color: #ccc;
-    flex-grow: 5;
-    height: 1px
-}
-
-.or-label {
-    flex-grow: 1;
-    margin: 0 15px;
-    text-align: center
-}
-</style>
-
-<div class="m-auto col-md-8">
-<div class="content-section">
-    <h3 class="border-bottom pb-3 mb-4">Únete hoy</h3>
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            
-            {{form|crispy}}
-            <script src="https://www.google.com/recaptcha/api.js"></script>
-            <div class="g-recaptcha" data-sitekey="6Lc6oUkaAAAAANkQnN5HaqEaDix1IvP7vkJSA1Zv"></div>
-        </fieldset>
-        <fieldset class="form-group">
-            <label>
-                <input type="checkbox" id="privacyCheckbox" onclick="handlePrivacyCheckbox()"> Acepto el aviso de privacidad de uso de datos personales.<br>
-                <span style="font-size: 12px;">El presente Aviso de Privacidad tiene como objeto informar al Titular sobre el tratamiento de sus datos, los cuales serán sometidos y almacenados en nuestras bases de datos y serán tratados según la Ley Estatutaria 1581 de 2012 de Protección de Datos y Decretos reglamentarios.</span>
-            </label>
-            <input type="hidden" id="privacyAccepted" name="privacy_accepted">
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit" id="submitBtn" disabled>Registrate</button>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/register.css' %}">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="form-container">
+                <a href="{% url 'firsthome' %}" class="arrow-back">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="NeteHoy" style="text-align: center; color: #286C63; font-size: 64px; font-family: 'Inter'; font-weight: 700; word-wrap: break-word; margin-top: 0px; margin-bottom: 30px;">Únete hoy</div>
+                <form id="registerForm" method="post" action="{% url 'register' %}" onsubmit="return validateForm(event)">
+                    {% csrf_token %}
+                    <div class="name-row">
+                        <div class="input-container first-name-container">
+                            <label for="id_first_name">Nombres</label>
+                            <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
+                        </div>
+                        <div class="input-container last-name-container">
+                            <label for="id_last_name">Apellidos</label>
+                            <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
+                        </div>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="id_username">Nombre de usuario</label>
+                        <input type="text" id="id_username" name="username" value="{{ form.username.value|default_if_none:'' }}">
+                        <span id="username_exists_error" class="error-message username-exists-error">{{ form.username.errors }}</span>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="id_email">Correo</label>
+                        <input type="email" id="id_email" name="email" value="{{ form.email.value|default_if_none:'' }}">
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="id_password1">Contraseña</label>
+                        <input type="password" id="id_password1" name="password1">
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="id_password2">Confirme su contraseña</label>
+                        <input type="password" id="id_password2" name="password2">
+                    </div>
+                    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="terms" name="terms" onclick="handlePrivacyCheckbox()" required>
+                        <label for="terms">Confirmo que he leído y acepto nuestros Términos y condiciones y Política de privacidad</label>
+                        <input type="hidden" id="privacyAccepted" name="privacyAccepted" value="">
+                    </div>
+                    
+                    <div class="captcha-container">
+                        <div class="g-recaptcha" data-sitekey="6Lc6oUkaAAAAANkQnN5HaqEaDix1IvP7vkJSA1Zv" data-callback="recaptchaCallback"></div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="register-button" disabled>
+                        REGISTRATE
+                    </button>
+                </form>
+                <div class="login-link">
+                    <span>¿Ya tienes una cuenta? </span>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </div>
+            </div>
         </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            ¿Ya tiene una cuenta? <a class="ml-2" href="{% url 'account_login' %}">Iniciar Sesión</a>
-        </small>
     </div>
-</div>
-</div>
-
-<script>
-function handlePrivacyCheckbox() {
-    var checkbox = document.getElementById("privacyCheckbox");
-    var submitBtn = document.getElementById("submitBtn");
-    var privacyAccepted = document.getElementById("privacyAccepted");
-
-    if (checkbox.checked) {
-        submitBtn.disabled = false;
-        privacyAccepted.value = "accepted";
-    } else {
-        submitBtn.disabled = true;
-        privacyAccepted.value = "";
-    }
-}
-</script>
-
-{% endblock %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{% static 'users/js/register.js' %}"></script>
+</body>
+</html>

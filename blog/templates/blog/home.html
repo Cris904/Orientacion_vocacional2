@@ -1,106 +1,100 @@
-{% extends "blog/base.html" %}
+  {% extends "blog/base.html" %}
 
-{% block title %}Home{% endblock %}
+  {% block title %}Home{% endblock %}
 
-{% block content %}
+  {% block content %}
 
-<div class="col-md-8">
+  {% load static %}
+
+  <link rel="stylesheet" href="{% static 'blog/css/home.css' %}">
+
+  <div class="main-content">
 
     {% for post in posts %}
 
-    <article class="content-section" style="overflow: auto; ">
+    <article class="card">
       <div class="media">
-          <img class="rounded-circle article-img " src="{{post.author.profile.image.url}}" alt="image">
-          <div class="media-body">
-              <p class="mb-0">
-                <a class="mr-2 h4" href="{% url 'profile-detail-view' post.author.pk %}">{{ post.author }}</a>
-              </p>
-              <small class="text-muted">{{ post.date_posted|date:"F d, Y-h:i A" }}</small>
-          </div>
+        <div>
+          <img src="{{post.author.profile.image.url}}" alt="image" width="100" height="100">
+        </div>
+        <div>
+          <a href="{% url 'profile-detail-view' post.author.pk %}" class="username-link">{{ post.author }}</a>
+          <br>
+          <small class="text-muted">{{ post.date_posted|date:"F d, Y-h:i A" }}</small>
+        </div>
+        <span class="add-icon-blog"></span>
       </div>
+      {% if post.author in added_users %}
+      <div class="UserPlus"></div>
+        <div class="Icon"></div>
+      </div>
+      {% else %}
+      <div class="UserCheck">
+        <div class="Icon"></div>
+      </div>
+      {% endif %}
       <hr>
-      <h3><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-      <hr>
-      <p class="article-content">{{ post.content|safe|linebreaks|truncatewords_html:"20" }}<a href="{% url 'post-detail' post.id %}">[Leer publicación completa]</a></p>
+      <h3 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+      <div class="fade-text">
+        <p>{{ post.content|safe|linebreaks|truncatewords_html:"100" }}</p>
+      </div>
+      <hr class="separator-line" style="border-top: 2px solid rgba(211, 211, 211, 0.5);">  <p class="read-more-container"><a href="{% url 'post-detail' post.id %}" class="read-more-link">Leer publicación completa</a></p>
     </article>
+
+    <hr class="separator">
 
     {% endfor %}
 
     {% if is_paginated %}
-
+    <div class="pagination"></div>
       {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">Primero</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Anterior</a>
+      <a href="?page=1" class="pagination-arrow">Primero</a>
+      <a href="?page={{page_obj.previous_page_number}}" class="pagination-arrow">Anterior</a>
       {% endif %}
 
       {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-        <a class="btn btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
-        {% endif %}
+      {% if page_obj.number == num %}
+        <a class="active" href="?page={{num}}">{{num}}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a href="?page={{num}}">{{num}}</a>
+      {% endif %}
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Siguiente</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Último</a>
+      <a href="?page={{page_obj.next_page_number}}" class="pagination-arrow">Siguiente</a>
+      <a href="?page={{page_obj.paginator.num_pages}}" class="pagination-arrow">Último</a>
       {% endif %}
-
+    </div>
     {% endif %}
 
-</div>
+  </div>
 
-<!-- SIDEBAR -->
-<div class="col-md-4">
-  <div class="content-section" style="border-top: 4px solid red;">
-      <h4>Publicaciones Recientes</h4>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- PEOPLE YOU CAN FOLLOW -->
+    <div class=" small-card follow-card">
+      <h4 class="follow-text">Puedes Seguir a</h4>
+      <hr>
+      <ul class="list-group">
+        {% for user in random_users %}
+        <a href="{% url 'profile-detail-view' user.pk %}" class="follow-link">
+          <li class="list-group-item">
+            <div>
+              <img src="{{ user.profile.image.url }}" alt="image">
+              {{ user.username }}
+            </div>
+            <span class="add-icon-follow">+</span>
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
       <br>
-      <!-- <p class="text-muted">You can put any information here you'd like. -->
-          <ul class="list-group">
-              {% if posts.0 %}
-                <a href="{% url 'post-detail' posts.0.pk %}"><li class="list-group-item list-group-item-light">{{ posts.0.title }}</li></a>
-              {% endif %}
-              {% if posts.1 %}
-                <a href="{% url 'post-detail' posts.1.pk %}"><li class="list-group-item list-group-item-light">{{ posts.1.title }}</li></a>
-              {% endif %}
-              {% if posts.2 %}
-                <a href="{% url 'post-detail' posts.2.pk %}"><li class="list-group-item list-group-item-light">{{ posts.2.title }}</li></a>
-              {% endif %}
-              {% if posts.3 %}
-                <a href="{% url 'post-detail' posts.3.pk %}"><li class="list-group-item list-group-item-light">{{ posts.3.title }}</li></a>
-              {% endif %}
-              {% if posts.4 %}
-                <a href="{% url 'post-detail' posts.4.pk %}"><li class="list-group-item list-group-item-light">{{ posts.4.title }}</li></a>
-              {% endif %}
-          </ul>
-          <br>
+    </div>
   </div>
 
-  <!-- PEOPLE YOU CAN FOLLOW -->
-
-  <div class="content-section " style="border-top: 4px solid blue;">
-    <h4>Puedes Seguir a</h4>
-    <br>
-        <ul class="list-group">
-          {% for user in random_users %}
-            <a href="{% url 'profile-detail-view' user.pk %}"><li class="list-group-item list-group-item-light">{{ user.username }}</li></a>
-          {% endfor %}
-  
-        </ul>
-        <br>
-  </div>
-
-</div>  
-
-{% endblock %}
-{% block script %}
-<script>
-
-  var colors = ['#FB9797', '#FB84BD', '#EA84FB', '#FF6D3F', '#4270E7', 'green', 'blue'];
-    $('.add-border').each(function() {
-        $(this).css('border-top', "3px solid " + colors[Math.floor(Math.random() * colors.length)]);
-    });
-
-</script>
-{% endblock %}
-
+  {% endblock %}
+  {% block script %}
+  <script>
+    // No need
+  </script>
+  {% endblock %}

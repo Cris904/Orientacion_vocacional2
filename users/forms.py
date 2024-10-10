@@ -5,11 +5,15 @@ from .models import Profile
 from PIL import Image
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-
     class Meta:
         model = User
-        fields = ['first_name','last_name','username','email','password1','password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("El nombre de usuario ya existe.")
+        return username
 
 
 class UserUpdateForm(forms.ModelForm):
