@@ -77,6 +77,9 @@
             font-size: 16px;
             margin-bottom: 5px;
         }
+        .input-container input:invalid {
+            border-color: red;
+        }
         .name-row {
             display: flex;
             justify-content: space-between;
@@ -172,12 +175,10 @@
                         <div class="input-container first-name-container">
                             <label for="id_first_name">Nombres</label>
                             <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
-                            <span id="first_name_error" class="error-message">El nombre es obligatorio.</span>
                         </div>
                         <div class="input-container last-name-container">
                             <label for="id_last_name">Apellidos</label>
                             <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
-                            <span id="last_name_error" class="error-message">Los apellidos son obligatorios.</span>
                         </div>
                     </div>
                     
@@ -190,19 +191,16 @@
                     <div class="input-container">
                         <label for="id_email">Correo</label>
                         <input type="email" id="id_email" name="email" value="{{ form.email.value|default_if_none:'' }}">
-                        <span id="email_error" class="error-message">El correo es obligatorio.</span>
                     </div>
                     
                     <div class="input-container">
                         <label for="id_password1">Contraseña</label>
                         <input type="password" id="id_password1" name="password1">
-                        <span id="password_error" class="error-message">La contraseña es obligatoria y debe tener al menos 8 caracteres.</span>
                     </div>
                     
                     <div class="input-container">
                         <label for="id_password2">Confirme su contraseña</label>
                         <input type="password" id="id_password2" name="password2">
-                        <span id="confirm_password_error" class="error-message">Las contraseñas no coinciden.</span>
                     </div>
                     
                     <div class="checkbox-container">
@@ -257,44 +255,75 @@
         var confirmPassword = document.getElementById("id_password2").value.trim();
 
         if (firstName === "") {
-            document.getElementById("first_name_error").style.display = "inline";
+            document.getElementById("id_first_name").setCustomValidity("El nombre es obligatorio.");
             isValid = false;
+        } else {
+            document.getElementById("id_first_name").setCustomValidity("");
         }
 
         if (lastName === "") {
-            document.getElementById("last_name_error").style.display = "inline";
+            document.getElementById("id_last_name").setCustomValidity("Los apellidos son obligatorios.");
             isValid = false;
+        } else {
+            document.getElementById("id_last_name").setCustomValidity("");
         }
 
         if (username === "") {
-            document.getElementById("username_error").style.display = "inline";
+            document.getElementById("id_username").setCustomValidity("El nombre de usuario es obligatorio.");
             isValid = false;
+        } else {
+            document.getElementById("id_username").setCustomValidity("");
         }
 
         if (email === "") {
-            document.getElementById("email_error").style.display = "inline";
+            document.getElementById("id_email").setCustomValidity("El correo es obligatorio.");
             isValid = false;
+        } else {
+            document.getElementById("id_email").setCustomValidity("");
         }
 
         if (password === "") {
-            document.getElementById("password_error").style.display = "inline";
+            document.getElementById("id_password1").setCustomValidity("La contraseña es obligatoria y debe tener al menos 8 caracteres.");
             isValid = false;
         } else if (password.length < 8) {
-            document.getElementById("password_error").style.display = "inline";
+            document.getElementById("id_password1").setCustomValidity("La contraseña debe tener al menos 8 caracteres.");
             isValid = false;
         } else if (/^\d+$/.test(password)) {
-            document.getElementById("password_error").style.display = "inline";
-            document.getElementById("password_error").textContent = "La contraseña no puede ser solo numérica.";
+            document.getElementById("id_password1").setCustomValidity("La contraseña no puede ser solo numérica.");
             isValid = false;
+        } else {
+            document.getElementById("id_password1").setCustomValidity("");
         }
 
         if (confirmPassword === "") {
-            document.getElementById("confirm_password_error").style.display = "inline";
+            document.getElementById("id_password2").setCustomValidity("Las contraseñas no coinciden.");
             isValid = false;
         } else if (password !== confirmPassword) {
-            document.getElementById("confirm_password_error").style.display = "inline";
+            document.getElementById("id_password2").setCustomValidity("Las contraseñas no coinciden.");
             isValid = false;
+        } else {
+            document.getElementById("id_password2").setCustomValidity("");
         }
+
+        // Clear custom validity messages on input
+        document.getElementById("id_first_name").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
+        document.getElementById("id_last_name").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
+        document.getElementById("id_username").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
+        document.getElementById("id_email").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
+        document.getElementById("id_password1").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
+        document.getElementById("id_password2").addEventListener("input", function() {
+            this.setCustomValidity("");
+        });
 
         if (!isValid) {
             event.preventDefault();

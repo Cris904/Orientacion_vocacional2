@@ -47,7 +47,7 @@
     height: auto;
     text-align: center;
     color: black;
-    font-size: 30px;
+    font-size: 36px; /* Increased font size */
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     word-wrap: break-word;
@@ -61,13 +61,16 @@
     overflow: hidden;
     transition: transform 0.3s ease;
     margin: 0 auto;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
   }
   .Group12:hover {
     transform: scale(1.05);
   }
   .Vector {
     width: 100%;
-    height: 72.26px;
+    height: 100%;
     left: 0;
     top: 0;
     position: absolute;
@@ -75,23 +78,18 @@
     border-radius: 36px;
   }
   .IniciaTuViajeAqu {
-    width: 303px;
-    height: 30px;
-    left: 50%;
-    top: 21px;
-    transform: translateX(-50%);
-    position: absolute;
     color: white;
-    font-size: 25px;
+    font-size: 28px; /* Increased font size */
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     word-wrap: break-word;
     text-align: center;
+    z-index: 1; /* Ensure text is above the background */
   }
   .DescubreInspRateEnfCate {
     width: 100%;
     color: #286C63;
-    font-size: 20px;
+    font-size: 24px; /* Increased font size */
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     word-wrap: break-word;
